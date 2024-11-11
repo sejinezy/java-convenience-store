@@ -96,4 +96,8 @@ public class ProductInventory {
     public Promotion getPromotion() {
         return promotion;
     }
+
+    public Stock getStock() {
+        return stock;
+    }
 }
