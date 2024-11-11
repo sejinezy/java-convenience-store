@@ -1,5 +1,6 @@
 package store.domain.promotion;
 
+import camp.nextstep.edu.missionutils.DateTimes;
 import java.time.LocalDate;
 
 public class Promotion {
@@ -50,7 +51,31 @@ public class Promotion {
         return endDate;
     }
 
+    public boolean isValidPeriod() {
+        return isWithinPromotionPeriod(getCurrentDate());
+    }
+
+    private boolean isWithinPromotionPeriod(final LocalDate date) {
+        return !date.isBefore(startDate) && !date.isAfter(endDate);
+    }
+
+    public int getPromotionSetSize() {
+        return buyCount + freeCount;
+    }
+
+    private LocalDate getCurrentDate() {
+        return DateTimes.now().toLocalDate();
+    }
+
     public PromotionType getType() {
         return type;
+    }
+
+    public int getFreeCount() {
+        return freeCount;
+    }
+
+    public int getBuyCount() {
+        return buyCount;
     }
 }
