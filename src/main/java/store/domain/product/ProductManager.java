@@ -57,4 +57,23 @@ public class ProductManager {
         inventory.add(ProductInventory.createFromInfos(productName, productInfos, promotionManager));
         processedProducts.add(productName);
     }
+
+    public List<String> getFormattedProductList() {
+        List<String> formattedList = new ArrayList<>();
+        for (ProductInventory product : inventory) {
+            formattedList.addAll(product.getFormattedInfos());
+        }
+        return formattedList;
+    }
+
+    public ProductInventory findProduct(String name) {
+        return inventory.stream()
+                .filter(product -> product.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다. 다시 입력해 주세요."));
+    }
+
+    public List<ProductInventory> getInventory() {
+        return Collections.unmodifiableList(inventory);
+    }
 }
