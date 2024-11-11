@@ -33,7 +33,7 @@ public class Stock {
     }
 
     private void validateQuantity(int quantity) {
-        if (quantity <= 0) {
+        if (quantity < 0) {
             throw new IllegalArgumentException(ERROR_INVALID_QUANTITY);
         }
     }
