@@ -37,4 +37,8 @@ public enum PromotionType {
     private boolean isMatchingType(final String inputName) {
         return name.equals(inputName);
     }
+
+    public String getName() {
+        return name;
+    }
 }
