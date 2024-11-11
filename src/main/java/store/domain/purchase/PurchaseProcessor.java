@@ -134,7 +134,7 @@ public class PurchaseProcessor {
             int setSize
     ) {
         Stock stock = product.getStock();
-        int normalStockUsed = quantity - maxPromoQuantity;
+        int normalStockUsed = quantity - stock.getPromotionStock();
         stock.decreasePromotionStock(stock.getPromotionStock());
         stock.decreaseNormalStock(normalStockUsed);
         int freeItems = calculateFreeItems(maxPromoQuantity, setSize, product.getPromotion());
