@@ -20,18 +20,57 @@ public class Config {
     private final PurchaseController purchaseController;
 
     public Config() {
-        FileReader fileReader = new FileReader(PRODUCTS_FILE_PATH, PROMOTIONS_FILE_PATH);
-        inputView = new InputView();
-        outputView = new OutputView();
+        inputView = createInputView();
+        outputView = createOutputView();
+        purchaseController = createPurchaseController();
+    }
 
-        List<ProductInfo> productInfos = fileReader.readProducts();
-        List<Promotion> promotions = fileReader.readPromotions();
+    private InputView createInputView() {
+        return new InputView();
+    }
 
-        ProductManager productManager = new ProductManager(productInfos, promotions);
-        PurchaseProcessor purchaseProcessor = new PurchaseProcessor(inputView, outputView);
-        ReceiptGenerator receiptGenerator = new ReceiptGenerator();
+    private OutputView createOutputView() {
+        return new OutputView();
+    }
 
-        purchaseController = new PurchaseController(inputView, outputView, productManager, purchaseProcessor, receiptGenerator);
+    private PurchaseController createPurchaseController() {
+        FileReader fileReader = createFileReader();
+        List<ProductInfo> productInfos = readProductInfos(fileReader);
+        List<Promotion> promotions = readPromotions(fileReader);
+        ProductManager productManager = createProductManager(productInfos, promotions);
+        PurchaseProcessor purchaseProcessor = createPurchaseProcessor();
+        ReceiptGenerator receiptGenerator = createReceiptGenerator();
+
+        return new PurchaseController(inputView, outputView, productManager,
+                purchaseProcessor, receiptGenerator
+        );
+    }
+
+    private FileReader createFileReader() {
+        return new FileReader(PRODUCTS_FILE_PATH, PROMOTIONS_FILE_PATH);
+    }
+
+    private List<ProductInfo> readProductInfos(FileReader fileReader) {
+        return fileReader.readProducts();
+    }
+
+    private List<Promotion> readPromotions(FileReader fileReader) {
+        return fileReader.readPromotions();
+    }
+
+    private ProductManager createProductManager(
+            List<ProductInfo> productInfos,
+            List<Promotion> promotions
+    ) {
+        return new ProductManager(productInfos, promotions);
+    }
+
+    private PurchaseProcessor createPurchaseProcessor() {
+        return new PurchaseProcessor(inputView, outputView);
+    }
+
+    private ReceiptGenerator createReceiptGenerator() {
+        return new ReceiptGenerator();
     }
 
     public OutputView getOutputView() {
@@ -42,4 +81,3 @@ public class Config {
         return purchaseController;
     }
 }
-
