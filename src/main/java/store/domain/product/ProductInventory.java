@@ -100,4 +100,8 @@ public class ProductInventory {
     public Stock getStock() {
         return stock;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }
