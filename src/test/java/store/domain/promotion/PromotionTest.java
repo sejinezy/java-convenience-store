@@ -53,5 +53,23 @@ class PromotionTest {
                 LocalDate.of(2024, 11, 1)
         ));
     }
+
+    @Test
+    void 프로모션_유효성_성공() {
+        Promotion promotion = new Promotion(PromotionType.CARBONATED_TWO_PLUS_ONE, 2, 1,
+                LocalDate.of(2024, 11, 1), LocalDate.of(2024, 12, 1));
+
+        assertTrue(promotion.isValidPeriod());
+    }
+
+    @Test
+    void 세트_크기_계산_성공() {
+        Promotion promotion = new Promotion(PromotionType.CARBONATED_TWO_PLUS_ONE, 2, 1,
+                LocalDate.of(2024, 11, 1), LocalDate.of(2024, 12, 1));
+
+        int setSize = promotion.getPromotionSetSize();
+
+        assertEquals(3, setSize);
+    }
 }
 
