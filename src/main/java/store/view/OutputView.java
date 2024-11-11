@@ -91,4 +91,16 @@ public class OutputView {
                 .sum();
     }
 
+    public void printMembershipQuestion() {
+        System.out.println("\n멤버십 할인을 받으시겠습니까? (Y/N)");
+    }
+
+    public void printContinueQuestion() {
+        System.out.println("\n감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)");
+    }
+
+    public void printError(String errorMessage) {
+        System.out.printf("\n[ERROR] %s\n", errorMessage);
+    }
+
 }
